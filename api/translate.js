@@ -30,8 +30,11 @@ export default async function handler(req, res) {
 
   if (direction === 'en2he') {
     systemPrompt += '\nTranslate FROM English TO Hebrew.';
+    systemPrompt += '\nWhen the grammatical gender of the subject is ambiguous in the source text (e.g. "you", "they", "the student", generic people), provide both forms: first the masculine (זכר), then the feminine (נקבה), each on its own line, labeled "ז׳:" and "נ׳:" respectively. If gender is clear from context, give only one form with no label.';
   } else if (direction === 'he2en') {
     systemPrompt += '\nTranslate FROM Hebrew TO English.';
+  } else {
+    systemPrompt += '\nIf your output is in Hebrew and the grammatical gender of the subject is ambiguous in the source text, provide both forms: first masculine (זכר), then feminine (נקבה), each on its own line, labeled "ז׳:" and "נ׳:" respectively. If gender is clear from context, give only one form with no label.';
   }
 
   if (register === 'formal') {
