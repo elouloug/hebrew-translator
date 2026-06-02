@@ -30,11 +30,11 @@ export default async function handler(req, res) {
 
   if (direction === 'en2he') {
     systemPrompt += '\nTranslate FROM English TO Hebrew.';
-    systemPrompt += '\nWhen the grammatical gender of the subject is ambiguous in the source text (e.g. "you", "they", "the student", generic people), output both the feminine and masculine forms on the same line separated by " / " — feminine first, then masculine. For example: "את טובה / אתה טוב". If gender is clear from context, give only one form.';
+    systemPrompt += '\nWhen the grammatical gender of the subject is ambiguous in the source text (e.g. "you", "they", "the student", generic people), output each gender as a complete, standalone sentence on its own line — feminine first, then masculine. Every line must be a full, copy-pasteable translation on its own. For example, "where are you going?" becomes:\nלאן את הולכת?\nלאן אתה הולך?\nIf gender is clear from context, give only one line.';
   } else if (direction === 'he2en') {
     systemPrompt += '\nTranslate FROM Hebrew TO English.';
   } else {
-    systemPrompt += '\nIf your output is in Hebrew and the grammatical gender of the subject is ambiguous in the source text, output both the feminine and masculine forms on the same line separated by " / " — feminine first, then masculine. For example: "את טובה / אתה טוב". If gender is clear from context, give only one form.';
+    systemPrompt += '\nIf your output is in Hebrew and the grammatical gender of the subject is ambiguous in the source text, output each gender as a complete, standalone sentence on its own line — feminine first, then masculine. Every line must be a full, copy-pasteable translation on its own. For example, "where are you going?" becomes:\nלאן את הולכת?\nלאן אתה הולך?\nIf gender is clear from context, give only one line.';
   }
 
   if (register === 'formal') {
