@@ -12,11 +12,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
-  const { text, direction, register, nikud, password } = req.body ?? {};
-
-  if (password !== process.env.APP_PASSWORD) {
-    return res.status(401).json({ error: 'Incorrect password.' });
-  }
+  const { text, direction, register, nikud } = req.body ?? {};
 
   if (!text || text.trim().length === 0) {
     return res.status(400).json({ error: 'Text is required.' });

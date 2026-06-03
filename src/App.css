@@ -73,36 +73,6 @@ body {
   font-weight: 300;
 }
 
-/* Password */
-.password-row {
-  display: flex;
-  justify-content: center;
-}
-
-.password-input {
-  width: 100%;
-  max-width: 320px;
-  padding: 0.55rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: var(--text);
-  box-shadow: var(--shadow);
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.password-input:focus {
-  outline: none;
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
-}
-
-.password-input::placeholder {
-  color: var(--text-placeholder);
-}
-
 /* Controls */
 .controls {
   display: flex;

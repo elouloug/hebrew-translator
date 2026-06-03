@@ -23,7 +23,6 @@ function outputDir(direction, translation) {
 }
 
 export default function App() {
-  const [password, setPassword] = useState(() => sessionStorage.getItem('ht_password') || '');
   const [text, setText] = useState('');
   const [translation, setTranslation] = useState('');
   const [direction, setDirection] = useState('auto');
@@ -33,15 +32,11 @@ export default function App() {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    sessionStorage.setItem('ht_password', password);
-  }, [password]);
-
   const inDir = inputDir(direction, text);
   const outDir = outputDir(direction, translation);
 
   async function handleTranslate() {
-    if (!text.trim() || !password) return;
+    if (!text.trim()) return;
     setLoading(true);
     setError('');
     setTranslation('');
@@ -50,7 +45,7 @@ export default function App() {
       const res = await fetch('/api/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, direction, register, nikud, password }),
+        body: JSON.stringify({ text, direction, register, nikud }),
       });
 
       const data = await res.json();
@@ -80,7 +75,7 @@ export default function App() {
     }
   }
 
-  const canTranslate = !loading && text.trim().length > 0 && password.length > 0;
+  const canTranslate = !loading && text.trim().length > 0;
 
   return (
     <div className="app">
@@ -91,17 +86,6 @@ export default function App() {
           <span lang="he" dir="rtl">עברית</span>
         </h1>
       </header>
-
-      <div className="password-row">
-        <input
-          type="password"
-          placeholder="App password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="password-input"
-          autoComplete="current-password"
-        />
-      </div>
 
       <div className="controls">
         <label className="control-group">
